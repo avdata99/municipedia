@@ -48,19 +48,20 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['database'] = 'municipa_db';
-
 if (ENVIRONMENT == "development")
     {
-    $db['default']['username'] = 'root';
-    $db['default']['password'] = 'gnu5454';
+    $db['default']['hostname'] = DATABASE_HOST_DEVEL;
+    $db['default']['database'] = DATABASE_NAME_DEVEL;
+    $db['default']['username'] = DATABASE_USER_DEVEL;
+    $db['default']['password'] = DATABASE_PASS_DEVEL;
     }
     
 if (ENVIRONMENT == "production")
     {
-    $db['default']['username'] = 'municipa_user';
-    $db['default']['password'] = 'muni99';
+    $db['default']['hostname'] = DATABASE_HOST;
+    $db['default']['database'] = DATABASE_NAME;
+    $db['default']['username'] = DATABASE_USER;
+    $db['default']['password'] = DATABASE_PASS;
     }
 
 $db['default']['dbdriver'] = 'mysql';
