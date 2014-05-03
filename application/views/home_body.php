@@ -28,6 +28,11 @@
                     para que cualquiera pueda participar.
                 </p>
                 <p>
+                    La idea inicial con la que comenzamos el proyecto la contamos 
+                        <a target='_blank' href='http://andresvazquez.com.ar/blog/municipedia/'>aquí</a>
+                        , nos interesa tu opinión.
+                </p>
+                <p>
                     Todavía estamos en una versión inicial pero mas adelante podremos agregar visualizaciones a los datos, vamos
                     a poder calificar y valorar los datos para dejar solo los mejores.
                 </p>
