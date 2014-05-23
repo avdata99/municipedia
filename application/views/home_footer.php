@@ -18,14 +18,14 @@
                         <p>Somos el equipo de <a target="_blank" href="http://data99.com.ar">data 99</a> - 
                         <a target="_blank" href="http://twitter.com/data99"><i class="icon-twitter"> @data99</i></a> - 
                         <a target="_blank" href="http://facebook.com/data99"><i class="icon-facebook"> fb.com/data99</i></a>
-                        <a target="_blank" href="https://plus.google.com/u/0/b/103276726695693158814/"><i class="icon-google-plus"> +data99</i></a>
+                        <a target="_blank" href="https://google.com/+Data99Ar"><i class="icon-google-plus"> +data99</i></a>
                     </p>
                     </div>
                     <div class="widget span3">
                         <h4>Social</h4>
                         <p><a target="_blank" href="http://twitter.com/municipedia"><i class="icon-twitter-sign"> @municipedia</i></a> - 
-                        <a target="_blank" href="http://facebook.com/pages/Municipedia/499416823483441"><i class="icon-facebook-sign"> fb.com/municipedia</i></a></p>
-                        <a target="_blank" href="https://plus.google.com/u/0/b/113383814976709062786"><i class="icon-google-plus-sign"> +municipedia</i></a>
+                        <a target="_blank" href="http://facebook.com/municipedia"><i class="icon-facebook-sign"> fb.com/municipedia</i></a></p>
+                        <a target="_blank" href="https://google.com/+Municipedia"><i class="icon-google-plus-sign"> +municipedia</i></a>
                     </div>
                 </div>
                 
