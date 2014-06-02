@@ -38,9 +38,9 @@ class Data_mdl extends CI_Model
             {
             //if (strtolower($fld) == "id") $fld = $nameFiledIds;//a futuro permitir link_X con mas IDs posibles de otras sets
             if (strtolower($fld) == "id") continue;
-            $este = array("nombre"=>$fld, "tipo"=>"VARCHAR", "size"=>90);
+            $este = array("nombre"=>trim($fld), "tipo"=>"VARCHAR", "size"=>90);
             $fields[] = (object)$este;
-            $campos_str .= ",`$fld`";
+            $campos_str .= ",`" . trim($fld)."`";
             }
             
         $r = $this->createTableDataSet($newTable, $fields);
@@ -95,6 +95,7 @@ class Data_mdl extends CI_Model
         
         foreach ($fields as $fld) // ,`casas añatuyas` int(11) NOT NULL, `pomelos ninjas` varchar(90) NOT NULL";
             {
+            $fld->nombre = trim($fld->nombre);
             $q .= ", `$fld->nombre` $fld->tipo($fld->size) NULL";
             }
             

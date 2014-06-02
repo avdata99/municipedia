@@ -1,0 +1,1 @@
+SELECT m.municipio, m.latitud, m.longitud, s1.poblacion, s0.`Coparticipacion provincial Abril 2014` FROM municipios m join set_20140601207201 s0 on s0.link_0 = m.id join link_1 l1 on s0.link_0 = l1.id join set_1 s1 on s1.link_1 = l1.link_1 order by municipio
