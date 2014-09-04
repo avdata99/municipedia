@@ -16,7 +16,7 @@
                     <div class="widget span3">
                         <h4>Quienes somos?</h4>
                         <p>Somos el equipo de <a target="_blank" href="http://data99.com.ar">data 99</a> - 
-                        <a target="_blank" href="http://twitter.com/data99"><i class="icon-twitter"> @data99</i></a> - 
+                        <a target="_blank" href="http://twitter.com/data_99"><i class="icon-twitter"> @data_99</i></a> - 
                         <a target="_blank" href="http://facebook.com/data99"><i class="icon-facebook"> fb.com/data99</i></a>
                         <a target="_blank" href="https://google.com/+Data99Ar"><i class="icon-google-plus"> +data99</i></a>
                     </p>
