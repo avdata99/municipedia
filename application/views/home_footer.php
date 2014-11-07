@@ -36,7 +36,7 @@
         <script src="/assets/js/jquery.flexslider.js"></script>
         <script src="/assets/js/jquery.tweet.js"></script>
         <script src="/assets/js/jflickrfeed.js"></script>
-        <script type = "text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDtM2Vw54AOuuqWBnECYdQn15XtxVC1s-c&sensor=false&libraries=places"></script>
+        <script type = "text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyC_ljkIs4MnzC82Mmww-K19IE8YSXUgxAU&sensor=false&libraries=places"></script>
         <script src="/assets/js/jquery.ui.map.min.js"></script>
         <script src="/assets/js/jquery.quicksand.js"></script>
         <script src="/assets/prettyPhoto/js/jquery.prettyPhoto.js"></script>
