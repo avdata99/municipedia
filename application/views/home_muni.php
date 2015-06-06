@@ -83,11 +83,14 @@ Seguir a @municipedia
 $(document).ready(function() {
     //traer los datos resumids
     var muni_id = $("#otros").data("muniid");
+    // leer todos los datos disponibles
     var jx = $.getJSON("assets/datas/" + muni_id + ".json");
      jx.done(function(data)
         {
         $("#otros").html("");
         var myhtml = '';
+        var assets = 'http://municipedia.com/assets'; // para recursos estaticos
+        // cada dato permite descargas en formatos multiples (que se crean en caliente cuando no existen)
         $(data).each(function()
             {
             if (this.length > 0) 
@@ -102,14 +105,52 @@ $(document).ready(function() {
             myhtml += "<a href='/datos/download/"+urldata+"/"+muni_id+"/xls'>XLS</a> ";
             myhtml += "<a href='/datos/download/"+urldata+"/"+muni_id+"/json'>JSON</a> ";
             
+            // cada uno de los campos del dato
             for (var prop in this[0]) 
                 {
                 if (this[0].hasOwnProperty(prop)) 
                     {
+                    var valprop = this[0][prop];
+
                     if (prop === "id" || prop === "titulo" || prop === "descripcion" || prop === "tabla" || prop === "url") continue;
                     if (prop === "referente_id" || prop === "autor_id") continue;
                     if (prop.indexOf("link_") > -1) continue;
-                    myhtml += "<br/><b>"+prop+":</b> "+this[0][prop];
+
+                    // pueden venir links relativos a la plataforma
+                    // se esperan nombres de campo como <static_mcp_Fotos Ciudad>
+                    if (prop.indexOf("static_mcp_") > -1) {
+                        prop2 = prop.split('_');
+                        fld = prop2.slice(2);
+                        prop = fld.join('_');
+                        valprop = "<a target='_blank' href='"+assets+"/"+valprop+"'>Descargar</a>";
+                      }
+                    
+                    // pueden venir SHPs comprimidos (como el anterior pero as especifico)
+                    // se esperan nombres de campo como <shp_mcp_Ejes 2008>
+                    if (prop.indexOf("shp_mcp_") > -1) {
+                        prop2 = prop.split('_');
+                        fld = prop2.slice(2);
+                        prop = fld.join('_');
+                        valprop = "<a target='_blank' href='" + assets + "/" + valprop + "'>Decargar SHP</a>";
+                      }
+
+                    // GeoJson para ver o descargar
+                    // se esperan nombres de campo como <geojson_mcp_Ejes 2008>
+                    if (prop.indexOf("geojson_mcp_") > -1) {
+                        prop2 = prop.split('_');
+                        fld = prop2.slice(2);
+                        prop = fld.join('_');
+                        var vp = valprop;
+                        valprop = " <a target='_blank' href='/mapas/" + muni_id + "'>Ver GeoJSON</a> o ";
+                        valprop += " <a target='_blank' href='" + assets + "/" + vp + "'>Descargar GeoJSON</a>";
+                        
+                      }
+
+                    
+                    // si es un link mostrarlo como tal //TODO usar regex o algo mejor que este detector
+                    if (valprop.indexOf("http") == 0) 
+                        {valprop = '<a taget="_blank" href="' + valprop + '">' + valprop + '</a>';}
+                    myhtml += "<br/><b>"+prop+":</b> "+valprop;
                     }
                 }
             myhtml += "</div>";

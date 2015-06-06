@@ -61,6 +61,7 @@ class Datos extends CI_Controller {
         $this->load->view('home_footer', $data);
 	}        
         
+    /** permite descarga de archivo. Si no existen los crea y los graba */
     public function download($ref, $id=0, $format="json")
 	{
         
