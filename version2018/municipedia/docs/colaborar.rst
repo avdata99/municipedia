@@ -14,4 +14,4 @@ Si posees datos sobre Municipios puede enviárnoslo a municipedia@data99.com.ar
 Otros colaboradores
 -------------------
 
-Puedes hacernos notar errores o dejarnos sugerencias como `*issues* en GitHub <https://github.com/avdata99/municipedia/issues>`_.
+Puedes hacernos notar errores o dejarnos sugerencias como `issues en GitHub <https://github.com/avdata99/municipedia/issues>`_.
