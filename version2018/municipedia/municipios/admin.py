@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.gis import admin as gisadmin
+from .models import TipoLugar, Lugar
 
 
 class MunicipediaOSMGeoAdmin(gisadmin.OSMGeoAdmin):
@@ -18,3 +19,15 @@ class MunicipediaOSMGeoAdmin(gisadmin.OSMGeoAdmin):
     default_zoom = 14
     map_width = 800
     map_height = 500
+
+@admin.register(TipoLugar)
+class TipoLugarAdmin(admin.ModelAdmin):
+    list_display = ['nombre']
+    search_fields = ['nombre']
+    
+
+@admin.register(Lugar)
+class LugarAdmin(MunicipediaOSMGeoAdmin):
+    list_display = ['tipo', 'nombre_resumido', 'pertenece_a']
+    search_fields = ['nombre', 'nombre_resumido', 'pertenece_a__nombre']
+    list_filter = ['tipo']
