@@ -11,13 +11,13 @@ class TipoLugar(models.Model):
     
     
 class Lugar(models.Model):
-    pertenece_a = models.ForeignKey('self', null=True, blank=True)
+    tipo = models.ForeignKey(TipoLugar, on_delete=models.CASCADE)
+    pertenece_a = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL)
     nombre = models.CharField(max_length=190, help_text='Nombre oficial')
     nombre_resumido = models.CharField(max_length=90, help_text='Nombre corto, informal y más amigable del lugar')
-    tipo = models.ForeignKey(TipoLugar)
     
-    latlong = models_geo.PointField(null=True, blank=True)
-    poligono = models_geo.PolygonField(null=True, blank=True)
+    latlong = models_geo.PointField(null=True, blank=True, help_text='Punto representativo del lugar en el mapa')
+    poligono = models_geo.PolygonField(null=True, blank=True, help_text='Polígono del lugar en el mapa')
     
     def __str__(self):
         ret = self.nombre_resumido
