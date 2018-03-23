@@ -19,10 +19,13 @@ class Lugar(models.Model):
     latlong = models_geo.PointField(null=True, blank=True, help_text='Punto representativo del lugar en el mapa')
     poligono = models_geo.PolygonField(null=True, blank=True, help_text='Polígono del lugar en el mapa')
     
-    def __str__(self):
-        ret = self.nombre_resumido
+    def geo_breadcrumb(self):
+        ret = [self]
         obj = self
         while obj.pertenece_a is not None:
-            ret = '{} - {}'.format(obj.pertenece_a.nombre_resumido, ret)
+            ret.append(obj.pertenece_a)
             obj = obj.pertenece_a
         return ret
+    
+    def __str__(self):
+        return self.nombre_resumido if self.pertenece_a is None else '{} - {}'.format(self.pertenece_a.nombre_resumido, self.nombre_resumido)

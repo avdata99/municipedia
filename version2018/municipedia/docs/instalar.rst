@@ -25,3 +25,4 @@ y ejecutar la siguientes directivas sql
     ALTER ROLE municipedia SET default_transaction_isolation TO 'read committed';
     ALTER ROLE municipedia SET timezone TO 'UTC';
     GRANT ALL PRIVILEGES ON DATABASE municipedia TO municipedia;
+    ALTER ROLE municipedia superuser;
