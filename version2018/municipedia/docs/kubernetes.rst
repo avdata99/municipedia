@@ -7,7 +7,7 @@ desplegar este proyecto en Google Cloud vía *kubernetes*.
 Otra opciones útiles:
  - docker + docker-compose con django: `aquí <https://docs.docker.com/compose/django/#connect-the-database>`_.
  - de docker a Google Cloud: `aquí <https://scotch.io/tutorials/google-cloud-platform-i-deploy-a-docker-app-to-google-container-engine-with-kubernetes>`_.
- - Paso a paso de proyecto django + postgres + redis con minikube y google containers engine: `aquí <https://github.com/waprin/kubernetes_django_postgres_redis>`_.
+ - django + postgres + redis con minikube y google containers engine: `aquí <https://github.com/waprin/kubernetes_django_postgres_redis>`_.
 
 Activar el proyecto en Google Cloud
 -----------------------------------
