@@ -35,18 +35,17 @@ Tambien puede quedar configurado para que no lo pida de nuevo a futuro.
   gcloud config set project [PROJECT_ID]
   gcloud config set compute/zone us-central1-b
 
-Defino la variable de entorno y compilo el contenedor de la app.
+Compilo el contenedor de la app con el tag específico. 
+El prefijo gcr.io se refiere al *Google Container Registry*
 
 .. code:: bash
   export PROJECT_ID="$(gcloud config get-value project -q)"
-  docker build -t gcr.io/${PROJECT_ID}/municipedia:v1 
+  docker build -t gcr.io/${PROJECT_ID}/municipedia:v1 .
 
-
-
-
+Subir la nueva imagen tageada
 
 .. code:: bash
-  
+  gcloud docker -- push gcr.io/${PROJECT_ID}/municipedia:v1
 
 
 
