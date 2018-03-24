@@ -54,9 +54,29 @@ Probando en el entorno local el contenedor compilado
   docker run --rm -p 8080:8080 gcr.io/${PROJECT_ID}/municipedia:v1
 
 
+Crear el cluster para hacer correr las imágenes
 .. code:: bash
 
-.. code:: bash
+  gcloud container clusters create municipedia-cluster --num-nodes=2
+  # obtener las credenciales despues de creados
+  # gcloud container clusters get-credentials municipedia-cluster
+
+Resultado
+.. 
+
+  gcloud container clusters create municipedia-cluster --num-nodes=2
+
+  WARNING: Starting in Kubernetes v1.10, new clusters will no longer get compute-rw and storage-ro scopes added to what is specified in --scopes (though the latter will remain included in the default --scopes). To use these scopes, add them explicitly to --scopes. To use the new behavior, set container/new_scopes_behavior property (gcloud config set container/new_scopes_behavior true).
+  Creating cluster municipedia-cluster...done.                                                                                                                                                                      
+
+  Created [https://container.googleapis.com/v1/projects/municipedia-199015/zones/us-east4-b/clusters/municipedia-cluster].
+
+  To inspect the contents of your cluster, go to: https://console.cloud.google.com/kubernetes/workload_/gcloud/us-east4-b/municipedia-cluster?project=municipedia-199015
+  kubeconfig entry generated for municipedia-cluster.
+
+  NAME                 LOCATION    MASTER_VERSION  MASTER_IP      MACHINE_TYPE   NODE_VERSION  NUM_NODES  STATUS
+  municipedia-cluster  us-east4-b  1.8.8-gke.0     35.199.44.228  n1-standard-1  1.8.8-gke.0   2          RUNNING
+
 
 .. code:: bash
 
