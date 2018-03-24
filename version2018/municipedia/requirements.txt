@@ -4,7 +4,6 @@ Django==2.0.3
 -e git+https://github.com/radiac/django-tagulous.git@30e89aebe5d423ca3a04a7bfc74162f2b49d9167#egg=django_tagulous
 idna==2.6
 Pillow==5.0.0
-pkg-resources==0.0.0
 psycopg2==2.7.4
 psycopg2-binary==2.7.4
 pytz==2018.3

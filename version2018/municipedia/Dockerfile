@@ -5,6 +5,7 @@ WORKDIR /code
 
 # instalar las loibrerías python necesarias para el proyecto (django y otros)
 ADD requirements.txt /code/
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # meter las librerías que necesite el sistema operativo
