@@ -47,15 +47,25 @@ Subir la nueva imagen tageada
 .. code:: bash
   gcloud docker -- push gcr.io/${PROJECT_ID}/municipedia:v1
 
+Probando en el entorno local el contenedor compilado
 
+.. code:: bash
 
+  docker run --rm -p 8080:8080 gcr.io/${PROJECT_ID}/municipedia:v1
 
 
 .. code:: bash
 
+.. code:: bash
 
+.. code:: bash
 
+.. code:: bash
 
+.. code:: bash
 
+.. code:: bash
+
+.. code:: bash
 
 .. code:: bash
