@@ -6,6 +6,7 @@ desplegar este proyecto en Google Cloud vía *kubernetes*.
 
 Otra opciones útiles:
  - docker + docker-compose con django: `aquí <https://docs.docker.com/compose/django/#connect-the-database>`_.
+ - traducir compose a recursos kubernetes `<https://kubernetes.io/docs/tools/kompose/user-guide/>`_.
  - de docker a Google Cloud: `aquí <https://scotch.io/tutorials/google-cloud-platform-i-deploy-a-docker-app-to-google-container-engine-with-kubernetes>`_.
  - django + postgres + redis con minikube y google containers engine: `aquí <https://github.com/waprin/kubernetes_django_postgres_redis>`_.
 
@@ -51,76 +52,46 @@ Tambien puede quedar configurado para que no lo pida de nuevo a futuro.
 
 Re-compilar mi contenedor
 -------------------------
+Mi aplicación funciona sin problemas con docker-compose donde estan descriptos los servicios que necesito.
+Kubernetes no usa los archivos de confugración de *docker-compose* (si con docker a secas).
 
-Ya con la app funcionando en docker vuelvo a compilarla pensando en subir a google cloud.
-
-Compilo el contenedor de la app con el tag específico. 
-El prefijo gcr.io se refiere al *Google Container Registry*.
-Podes despues ver tus imágenes privadas en: https://console.cloud.google.com/gcr
-
-.. code:: bash
-
-  export PROJECT_ID="$(gcloud config get-value project -q)"
-  docker build -t gcr.io/${PROJECT_ID}/municipedia:v1 .
-
-Subir la nueva imagen tageada.
+Para pasar de yaml de compose a kubernetes existe `esto <https://github.com/kubernetes/kompose>`_.
+Genero entonces un directorio kubernetes con los archivos generados.
 
 .. code:: bash
 
-  gcloud docker -- push gcr.io/${PROJECT_ID}/municipedia:v1
-  
-  # luego para actualizar hay que recompilar con nuevo tag
-  docker build -t gcr.io/${PROJECT_ID}/municipedia:v2 .
-  # y subir la nueva imagen
-  gcloud docker -- push gcr.io/${PROJECT_ID}/municipedia:v2
-  # aplicar la actualizacion a tu cluster
-  kubectl set image deployment/municipedia-web municipedia-web=gcr.io/${PROJECT_ID}/municipedia:v2
+  kompose convert -o kubernetes/
 
-Probando en el entorno local el contenedor compilado
-
-.. code:: bash
-
-  docker run --rm -p 8000:8000 gcr.io/${PROJECT_ID}/municipedia:v1
-
-
-Crear el cluster para hacer correr las imágenes. 
+Ya tengo lista mis instrucciones para desplegar. Ahora creo el cluster donde se desplegará.
 Esto prende especificamente los servidores/nodos solicitados y pueden verse en el panel de Google Cloud.
 
 .. code:: bash
 
-  gcloud container clusters create municipedia-cluster --num-nodes=2
-  # despues de creado se pueden obtener las credenciales así
-  gcloud container clusters get-credentials municipedia-cluster
+    gcloud container clusters create municipedia-cluster --num-nodes=2
+    # despues de creado se pueden obtener las credenciales así
+    gcloud container clusters get-credentials municipedia-cluster
 
-Resultado de la creación del cluster
-.. 
 
-  gcloud container clusters create municipedia-cluster --num-nodes=2
-
-  WARNING: Starting in Kubernetes v1.10, new clusters will no longer get compute-rw and storage-ro scopes added to what is specified in --scopes (though the latter will remain included in the default --scopes). To use these scopes, add them explicitly to --scopes. To use the new behavior, set container/new_scopes_behavior property (gcloud config set container/new_scopes_behavior true).
-  Creating cluster municipedia-cluster...done.                                                                                                                                                                      
-
-  Created [https://container.googleapis.com/v1/projects/municipedia-nnnnn/zones/us-east3-b/clusters/municipedia-cluster].
-
-  To inspect the contents of your cluster, go to: https://console.cloud.google.com/kubernetes/workload_/gcloud/us-east3-b/municipedia-cluster?project=municipedia-nnnnnn
-  kubeconfig entry generated for municipedia-cluster.
-
-  NAME                 LOCATION    MASTER_VERSION  MASTER_IP      MACHINE_TYPE   NODE_VERSION  NUM_NODES  STATUS
-  municipedia-cluster  us-east3-b  1.8.8-gke.0     35.19.144.128  n1-standard-1  1.8.8-gke.0   2          RUNNING
+Desplegar 
+.. code:: bash
+  # crear instancias para todos los archivos exportados desde 
+  kubectl create -f kubernetes/
+  # ver los pods creados
+  kubectl get pods
+  
+  NAME                   READY     STATUS            RESTARTS   AGE
+  db-6fnnnnf8f-xnnnj    1/1       Running            0          2m
+  web-7nnnn86c-4nnns    0/1       ImagePullBackOff   0          2m
 
 Podes ver la lista de instancias
 
 .. code:: bash
 
   gcloud compute instances list
+  NAME                                  ZONE        MACHINE_TYPE   PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP   STATUS
+  gke-municipedia-cluster-default-8dj2  us-east3-b  n1-standard-1               10.150.0.3   35.199.32.42  RUNNING
+  gke-municipedia-cluster-default-k3l4  us-east3-b  n1-standard-1               10.150.0.2   35.188.38.93  RUNNING
 
-Hacer el deploy de mi aplicación a estos nuevos servidores.
-
-.. code:: bash
-
-  kubectl run municipedia-web --image=gcr.io/${PROJECT_ID}/municipedia:v1 --port 8000
-  # ver el estatus de estos servicios.
-  kubectl get pods
   
 Poner un balanceador adelante para exponer esta aplicación a ala web.
 

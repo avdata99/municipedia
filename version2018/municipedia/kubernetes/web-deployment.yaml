@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose convert
+    kompose.cmd: kompose convert -o kubernetes/
     kompose.version: 1.10.0 (8bb0907)
   creationTimestamp: null
   labels:
@@ -23,11 +23,11 @@ spec:
         - python3
         - manage.py
         - runserver
-        - 0.0.0.0:8000
+        - 0.0.0.0:8080
         image: web
         name: web
         ports:
-        - containerPort: 8000
+        - containerPort: 8080
         resources: {}
         volumeMounts:
         - mountPath: /code
