@@ -4,8 +4,9 @@ Despliegue en Google Cloud
 Uso `este turorial <https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app>`_ para 
 desplegar este proyecto en Google Cloud vía *kubernetes*.
 
-Otra opción `útil <https://scotch.io/tutorials/google-cloud-platform-i-deploy-a-docker-app-to-google-container-engine-with-kubernetes>`_.
-
+Otra opciones utiles 
+ - docker + docker-compose con django: `aquí <https://docs.docker.com/compose/django/#connect-the-database>`_.
+ - de docker a Google Cloud: `aquí <https://scotch.io/tutorials/google-cloud-platform-i-deploy-a-docker-app-to-google-container-engine-with-kubernetes>`_.
 
 Activar el proyecto en Google Cloud
 -----------------------------------
