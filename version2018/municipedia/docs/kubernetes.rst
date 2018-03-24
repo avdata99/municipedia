@@ -46,6 +46,11 @@ Subir la nueva imagen tageada
 
 .. code:: bash
   gcloud docker -- push gcr.io/${PROJECT_ID}/municipedia:v1
+  
+  # luego para actualizar hay que recompilar con nuevo tag
+  docker build -t gcr.io/${PROJECT_ID}/municipedia:v2 .
+  # y subir la nueva imagen
+  gcloud docker -- push gcr.io/${PROJECT_ID}/municipedia:v2
 
 Probando en el entorno local el contenedor compilado
 
@@ -54,14 +59,15 @@ Probando en el entorno local el contenedor compilado
   docker run --rm -p 8080:8080 gcr.io/${PROJECT_ID}/municipedia:v1
 
 
-Crear el cluster para hacer correr las imágenes
+Crear el cluster para hacer correr las imágenes. 
+Esto prende especificamente los servidores/nodos solicitados y pueden verse en el panel de Google Cloud.
 .. code:: bash
 
   gcloud container clusters create municipedia-cluster --num-nodes=2
-  # obtener las credenciales despues de creados
-  # gcloud container clusters get-credentials municipedia-cluster
+  # despues de creado se pueden obtener las credenciales así
+  gcloud container clusters get-credentials municipedia-cluster
 
-Resultado
+Resultado de la creación del cluster
 .. 
 
   gcloud container clusters create municipedia-cluster --num-nodes=2
@@ -69,21 +75,29 @@ Resultado
   WARNING: Starting in Kubernetes v1.10, new clusters will no longer get compute-rw and storage-ro scopes added to what is specified in --scopes (though the latter will remain included in the default --scopes). To use these scopes, add them explicitly to --scopes. To use the new behavior, set container/new_scopes_behavior property (gcloud config set container/new_scopes_behavior true).
   Creating cluster municipedia-cluster...done.                                                                                                                                                                      
 
-  Created [https://container.googleapis.com/v1/projects/municipedia-199015/zones/us-east4-b/clusters/municipedia-cluster].
+  Created [https://container.googleapis.com/v1/projects/municipedia-nnnnn/zones/us-east3-b/clusters/municipedia-cluster].
 
-  To inspect the contents of your cluster, go to: https://console.cloud.google.com/kubernetes/workload_/gcloud/us-east4-b/municipedia-cluster?project=municipedia-199015
+  To inspect the contents of your cluster, go to: https://console.cloud.google.com/kubernetes/workload_/gcloud/us-east3-b/municipedia-cluster?project=municipedia-nnnnnn
   kubeconfig entry generated for municipedia-cluster.
 
   NAME                 LOCATION    MASTER_VERSION  MASTER_IP      MACHINE_TYPE   NODE_VERSION  NUM_NODES  STATUS
-  municipedia-cluster  us-east4-b  1.8.8-gke.0     35.199.44.228  n1-standard-1  1.8.8-gke.0   2          RUNNING
+  municipedia-cluster  us-east3-b  1.8.8-gke.0     35.19.144.128  n1-standard-1  1.8.8-gke.0   2          RUNNING
 
 
+Hacer el deploy de mi aplicación a estos nuevos servidores
 .. code:: bash
 
+  kubectl run municipedia-web --image=gcr.io/${PROJECT_ID}/municipedia:v1 --port 8000
+  # ver el estatus de estos servicios.
+  kubectl get pods
+  
+Poner un balanceador adelante para exponer esta aplicación a ala web
 .. code:: bash
 
-.. code:: bash
-
+  kubectl expose deployment municipedia-web --type=LoadBalancer --port 80 --target-port 8000
+  # ver el estado del servicios
+  kubectl get service
+  
 .. code:: bash
 
 .. code:: bash
