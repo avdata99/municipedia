@@ -36,13 +36,15 @@ Tambien puede quedar configurado para que no lo pida de nuevo a futuro.
   gcloud config set compute/zone us-central1-b
 
 Compilo el contenedor de la app con el tag específico. 
-El prefijo gcr.io se refiere al *Google Container Registry*
+El prefijo gcr.io se refiere al *Google Container Registry*.
+
 .. code:: bash
 
   export PROJECT_ID="$(gcloud config get-value project -q)"
   docker build -t gcr.io/${PROJECT_ID}/municipedia:v1 .
 
-Subir la nueva imagen tageada
+Subir la nueva imagen tageada.
+
 .. code:: bash
 
   gcloud docker -- push gcr.io/${PROJECT_ID}/municipedia:v1
@@ -61,6 +63,7 @@ Probando en el entorno local el contenedor compilado
 
 Crear el cluster para hacer correr las imágenes. 
 Esto prende especificamente los servidores/nodos solicitados y pueden verse en el panel de Google Cloud.
+
 .. code:: bash
 
   gcloud container clusters create municipedia-cluster --num-nodes=2
@@ -84,14 +87,16 @@ Resultado de la creación del cluster
   municipedia-cluster  us-east3-b  1.8.8-gke.0     35.19.144.128  n1-standard-1  1.8.8-gke.0   2          RUNNING
 
 
-Hacer el deploy de mi aplicación a estos nuevos servidores
+Hacer el deploy de mi aplicación a estos nuevos servidores.
+
 .. code:: bash
 
   kubectl run municipedia-web --image=gcr.io/${PROJECT_ID}/municipedia:v1 --port 8000
   # ver el estatus de estos servicios.
   kubectl get pods
   
-Poner un balanceador adelante para exponer esta aplicación a ala web
+Poner un balanceador adelante para exponer esta aplicación a ala web.
+
 .. code:: bash
 
   kubectl expose deployment municipedia-web --type=LoadBalancer --port 80 --target-port 8000
