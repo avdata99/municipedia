@@ -4,8 +4,17 @@ Despliegue en Google Cloud
 Uso `este turorial <https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app>`_ para 
 desplegar este proyecto en Google Cloud vía *kubernetes*.
 
-Primero cree un nuevo proyecto en Google Cloud (con la facturación habilitada)
-`Sobre Ubuntu <https://cloud.google.com/sdk/docs/quickstart-debian-ubuntu>`_ instale *google-cloud-sdk*
+Activar el proyecto en Google Cloud
+-----------------------------------
+
+Primero cree un nuevo proyecto en Google Cloud (con la facturación habilitada) en 
+`kubernetes engine <https://console.cloud.google.com/projectselector/kubernetes>`_.
+
+Instalar el SDK de Google Cloud
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Seguí este tutorial `sobre Ubuntu <https://cloud.google.com/sdk/docs/quickstart-debian-ubuntu>`_ 
+e instale *google-cloud-sdk*.
 
 .. code:: bash
 
@@ -19,7 +28,7 @@ Primero cree un nuevo proyecto en Google Cloud (con la facturación habilitada)
   curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 
   # Update the package list and install the Cloud SDK
-  sudo apt-get update && sudo apt-get install google-cloud-sdk
+  sudo apt-get update && sudo apt-get install google-cloud-sdk kubectl
 
 Inicialicé el SDK 
 
@@ -35,8 +44,14 @@ Tambien puede quedar configurado para que no lo pida de nuevo a futuro.
   gcloud config set project [PROJECT_ID]
   gcloud config set compute/zone us-central1-b
 
+Re-compilar mi contenedor
+-------------------------
+
+Ya con la app funcionando en docker vuelvo a compilarla pensando en subir a google cloud.
+
 Compilo el contenedor de la app con el tag específico. 
 El prefijo gcr.io se refiere al *Google Container Registry*.
+Podes despues ver tus imágenes privadas en: https://console.cloud.google.com/gcr
 
 .. code:: bash
 
@@ -53,12 +68,14 @@ Subir la nueva imagen tageada.
   docker build -t gcr.io/${PROJECT_ID}/municipedia:v2 .
   # y subir la nueva imagen
   gcloud docker -- push gcr.io/${PROJECT_ID}/municipedia:v2
+  # aplicar la actualizacion a tu cluster
+  kubectl set image deployment/municipedia-web municipedia-web=gcr.io/${PROJECT_ID}/municipedia:v2
 
 Probando en el entorno local el contenedor compilado
 
 .. code:: bash
 
-  docker run --rm -p 8080:8080 gcr.io/${PROJECT_ID}/municipedia:v1
+  docker run --rm -p 8000:8000 gcr.io/${PROJECT_ID}/municipedia:v1
 
 
 Crear el cluster para hacer correr las imágenes. 
@@ -86,6 +103,11 @@ Resultado de la creación del cluster
   NAME                 LOCATION    MASTER_VERSION  MASTER_IP      MACHINE_TYPE   NODE_VERSION  NUM_NODES  STATUS
   municipedia-cluster  us-east3-b  1.8.8-gke.0     35.19.144.128  n1-standard-1  1.8.8-gke.0   2          RUNNING
 
+Podes ver la lista de instancias
+
+.. code:: bash
+
+  gcloud compute instances list
 
 Hacer el deploy de mi aplicación a estos nuevos servidores.
 
@@ -103,8 +125,23 @@ Poner un balanceador adelante para exponer esta aplicación a ala web.
   # ver el estado del servicios
   kubectl get service
   
+
+Limpiar todo para no gastar
+---------------------------
+
+Borrar todo lo hecho para no gastar.
+
 .. code:: bash
 
+  kubectl delete service municipedia-web
+  # Esperar que el balanceador termine su trabajo antes de borrarlo.
+  # El balanceador se borra asincrónicamente
+  # Se puede seguir este proceso con el comando
+  gcloud compute forwarding-rules list
+
+  # Borrar finalmente el cluster. Este comando elimina todas las máquinas virtuales, discos y recursos de red 
+  gcloud container clusters delete municipedia-cluster
+  
 .. code:: bash
 
 .. code:: bash
