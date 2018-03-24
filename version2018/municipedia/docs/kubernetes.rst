@@ -73,6 +73,7 @@ Esto prende especificamente los servidores/nodos solicitados y pueden verse en e
 
 
 Desplegar 
+
 .. code:: bash
   # crear instancias para todos los archivos exportados desde 
   kubectl create -f kubernetes/
