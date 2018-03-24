@@ -82,11 +82,10 @@ WSGI_APPLICATION = 'municipedia.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'municipedia',
-        'USER': 'municipedia',
-        'PASSWORD': 'municipedia',
-        # 'HOST': 'localhost',
-        # 'PORT': 5432,
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'db',
+        'PORT': 5432,
     }
 }
 

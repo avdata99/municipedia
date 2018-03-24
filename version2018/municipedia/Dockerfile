@@ -9,5 +9,7 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # meter las librerías que necesite el sistema operativo
-# RUN apt-get update && apt-get install xxxx xxxx  xxx --assume-yes
+RUN apt-get update && apt-get install apt-utils binutils libproj-dev gdal-bin --assume-yes
+
+# pasar todo mi repo al docker
 ADD . /code/
