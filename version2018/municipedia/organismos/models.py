@@ -24,7 +24,7 @@ class IdentificadorExterno(models.Model):
     observaciones_publicas = models.TextField(null=True, blank=True)
     
     def __str__(self):
-        return '{} {} ({})'.format(self.id_externo, self.lugar.nombre, self.organismo.nombre)    
+        return 'Ident {}'.format(self.organismo.nombre)
 
 
 class IdentificadoresExternos(models.Model):
@@ -34,4 +34,4 @@ class IdentificadoresExternos(models.Model):
     id_externo = models.CharField(max_length=90)
     
     def __str__(self):
-        return '{} {} ({})'.format(self.id_externo, self.lugar.nombre, self.organismo.nombre)
+        return '{} {} ({})'.format(self.id_externo, self.lugar.nombre, self.identificador.organismo.nombre)

@@ -14,6 +14,7 @@ class TipoLugar(models.Model):
         verbose_name = 'Tipo de Lugar'
         verbose_name_plural = 'Tipos de Lugares'
     
+
 class Lugar(models.Model):
     tipo = models.ForeignKey(TipoLugar, on_delete=models.CASCADE)
     pertenece_a = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL)
