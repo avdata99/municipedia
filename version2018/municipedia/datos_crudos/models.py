@@ -14,8 +14,8 @@ class DatoCrudo(models.Model):
     ambitos_incluidos = models.ManyToManyField(Lugar, help_text='Lugares vinculados al dato en cuestion')
     archivo = models.FileField(upload_to='datos/', blank=True)
     # el URLField como es un VARCHAR tiene limitaciones molestas 
-    url_sitio_descarga = models.TextField(null=True, blank=True)
-    url_archivo = models.TextField(null=True, blank=True)
+    url_sitio_descarga = models.TextField(null=True, blank=True, help_text='URL del sitio que da contexto al dato')
+    url_archivo = models.TextField(null=True, blank=True, help_text='URL directa a la descarga del archivo')
     observaciones_link = models.TextField(null=True, blank=True, help_text='Observaciones sobre la descarga y el sitio original')
 
     tags = TagField()
