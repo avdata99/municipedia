@@ -39,8 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.gis',
     
+    # otros plugins 
+    'tagulous',
+    
+    # mis modelos
     'municipios',
     'organismos',
+    'datos_crudos',
     
 ]
 

@@ -1,5 +1,6 @@
 from django.db import models
 from municipios.models import Lugar
+from tagulous.models import TagField
 
 
 class OrganismoExterno(models.Model):
@@ -8,6 +9,8 @@ class OrganismoExterno(models.Model):
     ambito_de_trabajo = models.ForeignKey(Lugar, null=True, blank=True, on_delete=models.SET_NULL)
     es_organismo_oficial = models.NullBooleanField(default=None)
     web_oficial_organismo = models.URLField(null=True, blank=True)
+    
+    tags = TagField()
     
     def __str__(self):
         return self.nombre
