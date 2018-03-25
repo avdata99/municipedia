@@ -99,7 +99,7 @@ Poner un balanceador adelante para exponer esta aplicación a ala web.
 
 .. code:: bash
 
-  kubectl expose deployment municipedia-web --type=LoadBalancer --port 80 --target-port 8000
+  kubectl expose deployment municipedia-web --type=LoadBalancer --port 80 --target-port 8080
   # ver el estado del servicios
   kubectl get service
   
