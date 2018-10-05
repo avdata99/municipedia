@@ -47,6 +47,7 @@ class Home extends CI_Controller {
         $this->load->view('home_head', $data);
         $this->load->view('home_menutop', $data);
         $this->load->view('home_user', $data);
+        $this->load->view('adsense', $data);
         $this->load->view('home_footer', $data);
 	}    
         
@@ -88,6 +89,7 @@ class Home extends CI_Controller {
             $this->load->view('home_head', $data);
             $this->load->view('home_menutop', $data);
             $this->load->view('home_muni', $data);
+            $this->load->view('adsense', $data);
             $this->load->view('home_footer', $data);
             // }
         }

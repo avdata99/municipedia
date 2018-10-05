@@ -22,6 +22,7 @@ class Imagenes extends CI_Controller {
         $this->load->view('home_head', $data);
         $this->load->view('home_menutop', $data);
         $this->load->view('home_imagenes', $data);
+        $this->load->view('adsense', $data);
         $this->load->view('home_footer', $data);
 	}
         

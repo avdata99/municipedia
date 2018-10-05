@@ -22,6 +22,7 @@ class Datos extends CI_Controller {
         $this->load->view('home_head', $data);
         $this->load->view('home_menutop', $data);
         $this->load->view('home_datos', $data);
+        $this->load->view('adsense', $data);
         $this->load->view('home_footer', $data);
 	}
         
@@ -40,6 +41,7 @@ class Datos extends CI_Controller {
         $this->load->view('home_head', $data);
         $this->load->view('home_menutop', $data);
         $this->load->view('home_referencia', $data);
+        $this->load->view('adsense', $data);
         $this->load->view('home_footer', $data);
 	}    
         
@@ -58,6 +60,7 @@ class Datos extends CI_Controller {
         $this->load->view('home_head', $data);
         $this->load->view('home_menutop', $data);
         $this->load->view('home_referencias', $data);
+        $this->load->view('adsense', $data);
         $this->load->view('home_footer', $data);
 	}        
         

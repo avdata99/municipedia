@@ -6,13 +6,14 @@ class Usuario extends CI_Controller {
 	{
         
         $data = array();
-        $data["descripcion"] = "Encicplopedia colaborativa sobre municipios de Argentina";
+        $data["descripcion"] = "Enciclopedia colaborativa sobre municipios de Argentina";
         $data["extra_body"] = "";
         $data["title"] = "Municipedia";
         
         $this->load->view('home_head', $data);
         $this->load->view('home_menutop', $data);
         $this->load->view('home_body', $data);
+        $this->load->view('adsense', $data);
         $this->load->view('home_footer', $data);
 	}
         

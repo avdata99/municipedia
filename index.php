@@ -20,7 +20,6 @@
  */
 $SN = $_SERVER["SERVER_NAME"];
 if (strstr($SN, "localhost")) define('ENVIRONMENT', 'development');
-else if (strstr($SN, "municipedia")) define('ENVIRONMENT', 'development');
 else define('ENVIRONMENT', 'production');
 
 define('ENVIRONMENT', 'development');
@@ -40,7 +39,7 @@ if (defined('ENVIRONMENT'))
 	{
 		case 'development':
                     error_reporting(E_ALL);
-                    ini_set("display_errors", "On");
+                    //ini_set("display_errors", "On");
 		break;
 	
 		case 'testing':

@@ -13,6 +13,7 @@ class Login extends CI_Controller {
         $this->load->view('home_head', $data);
         $this->load->view('home_menutop', $data);
         $this->load->view('home_blog', $data);
+        $this->load->view('adsense', $data);
         $this->load->view('home_footer', $data);
 	}
          
