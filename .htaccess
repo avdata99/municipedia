@@ -94,7 +94,7 @@ RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ 
 RewriteRule ^(.*)$ index.php/access_denied/$1 [PT,L]
 
 # Allow these directories and files to be displayed directly:
-RewriteCond $1 ^(index\.php|robots\.txt|favicon\.ico|assets|uploads)
+RewriteCond $1 ^(index\.php|robots\.txt|favicon\.ico|assets|uploads|ads\.txt)
 RewriteCond %{REQUEST_URI} !^/\.well-known/acme-challenge/[0-9a-zA-Z_-]+$
 RewriteCond %{REQUEST_URI} !^/\.well-known/cpanel-dcv/[0-9a-zA-Z_-]+$
 RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/(?:\ Ballot169)?
